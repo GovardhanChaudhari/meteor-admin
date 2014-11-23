@@ -1,0 +1,17 @@
+template(name="model_form")
+	.modal
+		.modal-header
+			a.close(data-dismiss="modal") x
+			if editing{{model_name}}
+				h3 Edit {{model_name}}
+			else
+				h3 Add {{model_name}}	
+			.modal-body
+				+each fields
+					+my_dynamic_template(field=.)
+			.modal-footer
+				if editing{{model_name}}
+					a(href="#").btn.btn-warning.update Update
+				else
+					a(href="#").btn.btn-success.save Save
+				a(href="#",data-dismiss="modal").btn.btn-cancel.cancel Cancel

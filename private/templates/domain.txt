@@ -1,0 +1,42 @@
+template(name="model_list")
+	if currentUser
+		if show{{model_name}}Form
+			+model_form
+		h1.page-header {{model_name}} 
+			small List
+
+		.container-fluid
+			if isInRole 'admin'
+				button.btn.btn-success.add{{model_name}} Add {{model_name}}
+			.row-fluid
+				table.table.table-striped.table-bordered.table-condenced.table-hover
+					thead
+						tr
+							+each fields
+								+table_header field=.
+							th
+								if isInRole 'admin'
+									a(href="#").btn.btn-danger.removeAll Remove All
+					tbody
+						each models
+							+table_row
+
+
+template(name="filterRow")
+	tr
+		td
+			input(name="nameFilter" id="nameFilter")
+
+
+template(name="table_row")
+	tr
+		each fields
+			+field_value
+		td
+			a(href="#").btn.btn-danger.remove Remove
+
+template(name="field_value")
+	td= value
+
+template(name="table_header")
+	th #{field.name}
