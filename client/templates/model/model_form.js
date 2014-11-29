@@ -2,8 +2,20 @@ if (Meteor.isClient) {
 
   Template.model_form.events({
     'click .save':function  (evt,tmpl) {
+      var currentModel = ModelUtils.currentModel();
       var p = TemplateUtils.getFormData(tmpl,ModelUtils.currentModel().fields);
-      ModelUtils.currentModel().insert(ModelUtils.currentModel().create(p,Shop.getCurrentShop()));
+      //var mongoModel = MongoUtils.createModel(currentModel.name);
+      //ModelUtils.currentModel().insert(ModelUtils.currentModel().create(p,{}));
+      if(currentModel.name === "model"){
+        //var model = ModelUtils.createModelFromData(p);
+        var modelId = ModelDb.insert(ModelDb.create(p,{}));
+        var model = new Mongo.Collection(p.name);
+        //ModelUtils.publishModel(model);
+      }else{
+        //TODO
+        currentModel.insert(currentModel.create(p,{}));
+      }
+      
       FormUtils.clearAllFormStates(Session);
     },
 

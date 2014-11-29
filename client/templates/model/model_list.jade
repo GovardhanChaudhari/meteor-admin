@@ -21,22 +21,5 @@ template(name="modelList")
 						each models
 							+table_row
 
-
-template(name="filterRow")
-	tr
-		td
-			input(name="nameFilter" id="nameFilter")
-
-
-template(name="table_row")
-	tr
-		each fields
-			+field_value
-		td
-			a(href="#").btn.btn-danger.remove Remove
-
-template(name="field_value")
-	td= value
-
 template(name="table_header")
 	th #{field.name}

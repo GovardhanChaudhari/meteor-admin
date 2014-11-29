@@ -10,11 +10,11 @@ if (Meteor.isClient) {
 	Template.table_row.helpers({
 	  fields:function(){
 	    return ModelUtils.getModelFields();
-	  },
+	  }/*,
 
 	  domainValue:function(){
 	    return this.domainInstance;
-	  }
+	  }*/
 
 	})
 

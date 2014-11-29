@@ -4,6 +4,8 @@ template(name="nav")
 			a.brand(href="/") #{currentShop.name}
 			if currentUser
 				ul.nav
+					li
+						a(href="/") Home
 					each models
 						+model
 			ul.nav
@@ -13,4 +15,7 @@ template(name="nav")
 template(name="model")
 	if isInRole "admin"
 		li
-			a(href="/#{name}", id="#{name}").model=name					
+			a(href="{{pathFor route='showmodel'}}").model=name
+
+template(name="models_link")
+	a(href="{{pathFor route=link.routeName}}").model_link=link.displayName			

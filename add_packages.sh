@@ -6,3 +6,4 @@ meteor add accounts-ui
 meteor add mquandalle:jade
 meteor add iron:router
 meteor add alanning:roles
+meteor add dburles:mongo-collection-instances

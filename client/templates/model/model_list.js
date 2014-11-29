@@ -7,20 +7,38 @@ if (Meteor.isClient) {
     models: function(){
       //return Products.find({muser:Meteor.userId(),name:Session.get('nameFilter')});
       //return Products.find({muser:Meteor.userId(),name: new RegExp(Session.get("nameFilter"))});
-      console.log("current shop: " + Shop.findByOwnerId(Meteor.userId()).name);
+      //console.log("current shop: " + Shop.findByOwnerId(Meteor.userId()).name);
       //var p = ModelUtils.currentModel().getProductsByInventoryId(Shop.getCurrentShop().inventoryId);
+      console.log("listing models for : " + ModelUtils.currentModel().name);
       var p = ModelUtils.currentModel().getModelList();
       //Session.set('products',p);
-      console.log("found products " + p.count());
-      return p;
+      console.log("found models: " + p.count());
+      if(p){
+        return p;  
+      }else{
+        ModelDb.find();
+      }
+      
     },
 
   
     fields:function(){
       //console.log("found fields : " + ModelUtils.getModelFields());
-      return ModelUtils.getModelFields();
+      //return ModelUtils.getModelFields();
+      //return ModelDb.findOne(Session.get(Current_Model_Id)).fields;
+      return ModelUtils.currentModel().fields;
     },
     
+    currentModel:function(){
+      var currentModel = ModelUtils.currentModel();
+      if(currentModel){
+        return currentModel;
+      }else{
+        return ModelDb;
+      }
+
+    }
+
   });
 
   Template.modelList.events({
@@ -34,5 +52,10 @@ if (Meteor.isClient) {
    }
 
 });
+
+  Template.modelList.rendered = function(){
+    console.log("model_list rendered");
+    console.log("found model defs: " + ModelDb.find().count());
+  }
 
 }

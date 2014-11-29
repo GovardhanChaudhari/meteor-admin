@@ -1,6 +1,10 @@
 
 Template.registerHelper("modelName",function(){
-	return Session.get(Current_Model);
+	return ModelUtils.currentModel().name;
+});
+
+Template.registerHelper("capitalize",function(str){
+	return StringUtils.capitalize(str);
 });
 
 /*Template.registerHelper("fields",function(){

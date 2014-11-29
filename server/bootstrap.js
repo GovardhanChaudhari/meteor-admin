@@ -1,15 +1,15 @@
 
 
-var collectionList = [Product,Shop,Inventory];
+//var collectionList = [Shop,Inventory];
 
 Meteor.methods({
-	removeAllProducts:function(){
+	/*removeAllProducts:function(){
 		Product.remove({});
 	},
 
 	getCurrentShop:function(){
 		return Shop.findOne();
-	},
+	},*/
 
 	getListTemplateData:function(){
 		console.log("template data :" + Assets.getText('templates/domain.txt'));
@@ -24,13 +24,14 @@ Meteor.methods({
 
 Meteor.startup(function(){
 
+	console.log("initing server bootstrap");
 	
 	//Meteor.users.remove({});
 	//Meteor.roles.remove({});
 
-	_.each(collectionList,function(collection){
+	/*_.each(collectionList,function(collection){
 		MongoUtils.clearData(collection);
-	});
+	});*/
 
 	
 	UserUtils.createAdmin({
@@ -55,23 +56,11 @@ Meteor.startup(function(){
 	Roles.addUsersToRoles(uid,['admin'])*/
 
 
-	MongoUtils.addData(Inventory,{
+	/*MongoUtils.addData(Inventory,{
 		name:"my inventory"
-	});
+	});*/
 
-	if(Product.find().count() === 0){
-		var data = [
-			{name:"p1",price:1,inventoryId:Inventory.findOne()._id},
-			{name:"p2",price:2,inventoryId:Inventory.findOne()._id},
-			{name:"p3",price:3,inventoryId:Inventory.findOne()._id}				
-		];	
-
-		var timestamp = (new Date()).getTime();
-		_.each(data,function(product){
-			Product.insert({sold:"false",name:product.name,price:product.price,createdAt:new Date(timestamp),inventoryId:product.inventoryId});
-			timestamp+=1;
-		});
-	}
+	
 
 	
 
@@ -83,12 +72,12 @@ Meteor.startup(function(){
 
 	
 
-	MongoUtils.addData(Shop,{
+/*	MongoUtils.addData(Shop,{
 		name:shopName,
 		inventoryId: Inventory.findOne()._id,
 		ownerId: UserUtils.findByEmail("a@a.com")._id
 	});
-
+*/
 	
 	/*MongoUtils.addData(Domain,{
 		name:'Customer',
@@ -112,4 +101,42 @@ Meteor.startup(function(){
 
 	//console.log("redering template : " + gvcUtils.TemplateUtils.render("hi {{name}}",{name:"gvc"}));
 
+	
+	//ModelDb.remove({});
+	//ModelDb.insert(ProductDef);
+
+	//var modelDef = ModelDb.findOne({name:"product"});
+	//console.log("found model def " + modelDef.name);
+	//var m =  ModelUtils.createModelFromData(modelDef);
+	//var m =  ModelUtils.createModelFromData(ProductDef);
+	//var m =  ModelUtils.createModelFromData({name:"products"});
+	//console.log("created model: " + m.name());
+	//console.log("model map is "+ ModelMap);
+	console.log("model map has following keys "+ Object.keys(ModelMap));
+	console.log("foudn model defs: "+ ModelDb.find().count());
+
+	/*Product = ModelMap['product'];
+
+	if(Product.find().count() === 0){
+		var data = [
+			{name:"p1",price:1}
+			//{name:"p2",price:2,inventoryId:Inventory.findOne()._id},
+			//{name:"p3",price:3,inventoryId:Inventory.findOne()._id}				
+		];	
+
+		var timestamp = (new Date()).getTime();
+		_.each(data,function(product){
+			//Product.insert({sold:"false",name:product.name,price:product.price,createdAt:new Date(timestamp),inventoryId:product.inventoryId});
+			Product.insert(product);
+			timestamp+=1;
+		});
+	}*/
+
+	console.log("publishing models");
+	var models = ModelDb.find().fetch();
+	_.each(models,function(model){
+		//Meteor.publish(model.name);
+	})
+
+	console.log("***********************");
 });
