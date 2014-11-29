@@ -12,9 +12,11 @@ What it does ?
 	- Basic CRUD operations
 
 How to do it?
+
 	- login with admin role
 		- user name:a@a.com
 		- pwd: admin123
+
 	- Define a model
 		- Click link 'model' on top navigation bar
 		- Click 'add model' button
