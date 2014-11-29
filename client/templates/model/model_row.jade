@@ -1,0 +1,16 @@
+template(name="filterRow")
+	tr
+		td
+			input(name="nameFilter" id="nameFilter")
+
+
+template(name="table_row")
+	tr
+		each fields
+			+field_value
+		td
+			a(href="#").btn.btn-danger.remove Remove
+
+template(name="field_value")
+	td= value
+

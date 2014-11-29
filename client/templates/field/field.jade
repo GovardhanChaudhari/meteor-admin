@@ -1,0 +1,23 @@
+template(name="model_fields")
+	+form_label(field=field)
+	div.model_fields
+		+each fields
+			+model_field
+	+add_new_field_link
+
+template(name="model_field")
+	div.model_field
+		
+		label(for="#{model_field_name}").field #{model_field_name}:
+		input.field(type="text", value=name, name=name, id="field_#{name}", placeholder="Enter field name") 
+
+		label(for="#{model_field_type}").field #{model_field_type}:
+		input.field(type="text", value=type, name=type, id="field_#{type}", placeholder="Enter field type")
+		
+		+remove_field_link
+	
+template(name="add_new_field_link")
+	a.field.add_new_field_link(href="#") Add New Field
+
+template(name="remove_field_link")
+	a.remove_field_link(href="#") X
