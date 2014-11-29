@@ -1,0 +1,18 @@
+template(name="model_fields")
+	+form_label(field=field)
+	div.model_fields
+		+each fields
+			+field_name
+	+add_new_field
+
+template(name="field_name")
+	div.model_field
+		label.field(for=model_field_name) #{model_field_name} :
+		input.field(type="text", value=name, name=name, id="field_#{name}")
+		+field_remove_button
+	
+template(name="add_new_field")
+	a.field.add_new_field_link(href="#") Add New Field
+
+template(name="field_remove_button")
+	a.remove_field_link(href="#") X

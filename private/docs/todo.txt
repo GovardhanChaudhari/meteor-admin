@@ -1,0 +1,14 @@
+problem : 
+	Do I need to hard code the CRUD operation for the Model definitions or I can use the existing
+generic logic to perform the CRUD.
+
+Sol:
+
+	- in generic CURD check the model name, if it is 'model' then use ModelDb else subscribe
+		the model.
+		
+	- publish the model def where it is created. ie in model_db.js
+
+*********************************************************************************
+
+problem: during creation of model definitions.
