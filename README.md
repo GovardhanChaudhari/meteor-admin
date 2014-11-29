@@ -12,16 +12,17 @@ What it does ?
 	- Basic CRUD operations
 
 How to do it?
-
+	- login with admin role
+		- user name:a@a.com
+		- pwd: admin123
 	- Define a model
-		- Create a file in lib/1domains/<your_model_name>.js
-		- Define your model in above file.
-			- eg.
-				Customer = ModelUtils.createModel('customer');
-				Customer.fields =  [
-					{name:"first_name"},
-					{name:"last_name"},
-					{name:"age"}
-				]
+		- Click link 'model' on top navigation bar
+		- Click 'add model' button
+		- Enter model name and field name
+		Note : You can only add one model field right now. work in progress ... 
+		
 	- You will see the link of your model name at the top of navigation bar
+		- When you click model name link of nav bar, it will show model list view
+		  where you can add model data
+		  Note: When u add a model data, it wont be shown, work in progress ...
 	
